@@ -172,7 +172,7 @@ module SpoilerBot
       post_message
     end    
 
-    get "/spoiler" do
+    get "/cast" do
       input = params[:text]
       binding.pry
       filter = input.split(/ /).inject(Hash.new{|h,k| h[k]=""}) do |h, s|
