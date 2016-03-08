@@ -213,7 +213,7 @@ module SpoilerBot
       a = Array.new(1) { Hash.new }
       a[0]['image_url'] = @card_url
       a[0]['text'] = 'Random MTG Card Test'
-      reply = {response_type: 'in_channel'. text: 'Random Card from Latest Set', attachments: a}
+      reply = {response_type: 'in_channel', text: 'Random Card from Latest Set', attachments: a}
       return reply.to_json
     end
   end
