@@ -209,7 +209,9 @@ module SpoilerBot
       end
 
       status 200
-      reply = { attachments: @card_url }
+      a = Array.new(1) { Hash.new }
+      a[0]['image_url'] = @card_url
+      reply = {text: 'cool', attachments: a}
       return reply.to_json
     end
   end
