@@ -67,7 +67,7 @@ module SpoilerBot
       hearthstone_json = File.read('lib/gvg.json')
       @@hearthstone_cards = JSON.parse(hearthstone_json)
 
-      set :static_cache_control, [:public, max_age : 60 * 60 * 24 * 365]
+      set :static_cache_control, [:public, max_age => 60 * 60 * 24 * 365]
 
 
       pages = []
@@ -158,8 +158,8 @@ module SpoilerBot
 
       url = "https://hooks.slack.com/services/####/######/########"
 
-      response = Typhoeus.post(url, body : {"channel" => "#general", "text" => text}.to_json)
-      render text : '', status : :ok
+      response = Typhoeus.post(url, body => {"channel" => "#general", "text" => text}.to_json)
+      render text => '', status => :ok
     end
 
     def get_random_hearthstone_card_image
