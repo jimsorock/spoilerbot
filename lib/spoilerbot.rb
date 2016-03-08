@@ -8,6 +8,8 @@ require 'json'
 require 'pry'
 require 'yaml'
 require 'typhoeus'
+require 'pry'
+require 'pry-byebug'
 
 module SpoilerBot
   class Web < Sinatra::Base
@@ -122,10 +124,9 @@ module SpoilerBot
       cards = cards.select {|card| card[:rules].downcase.include? filter[:rules]} if (filter[:rules] && !filter[:rules].empty?)
       cards = cards.select {|card| card[:name].downcase.include? filter[:name].downcase} if (filter[:name] && !filter[:name].empty?)
       cards = cards.select {|card| card[:color].map(&:downcase).include? filter[:color].downcase} if (filter[:color] && !filter[:color].empty?)
-      count = cards.count
       card  = cards.sample
 
-      return get_card_url(card,count)
+      return get_card_url(card)
     end
 
     def get_card_image(card)
@@ -140,9 +141,9 @@ module SpoilerBot
       filter
     end
 
-    def get_card_url(card,count)
+    def get_card_url(card)
       image_params = card[:image_url]
-      return image_params,count
+      return image_params
       
       # Gatherer
       #base_image_url = "http://gatherer.wizards.com/"
@@ -172,9 +173,14 @@ module SpoilerBot
     end    
 
     get "/spoiler" do
-      filter = add_scope(params)
-      @card,@count = get_random_card(filter)
-      @card_url = get_card_url(@card)
+      input = params[:text]
+      binding.pry
+      filter = input.split(/ /).inject(Hash.new{|h,k| h[k]=""}) do |h, s|
+        k,v = s.split(/=/)
+        h[k.to_sym] << v
+        h
+      end
+      @card_url = get_random_card(filter)
 
       haml :spoiler
     end
