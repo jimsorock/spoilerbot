@@ -180,8 +180,8 @@ module SpoilerBot
     end
 
     post "/spoiler" do
-      if params[:text] && params[:trigger_word]
-        input = params[:text].gsub(params[:trigger_word],"").strip
+      if params[:text]
+        input = params[:text]
         if input == "hearthstone"
           @card_url = get_random_hearthstone_card_image
         elsif  input == "reload"
