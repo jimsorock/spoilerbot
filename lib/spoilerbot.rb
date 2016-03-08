@@ -209,8 +209,8 @@ module SpoilerBot
       end
 
       status 200
-      reply = { username: 'spoilerbot', icon_emoji: ':alien:', text: "Matching cards: #{@count}\n#{@card_url}" }
-      return reply.to_json
+      reply = #{@card_url}
+      return reply
     end
   end
 end
