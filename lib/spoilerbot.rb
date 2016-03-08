@@ -60,6 +60,7 @@ module SpoilerBot
 
     before do
       #return 401 unless request["token"] == ENV['SLACK_TOKEN']
+      content_type 'application/json'
     end
 
     #http://gatherer.wizards.com/Pages/Search/Default.aspx?page=0&sort=cn+&output=standard&set=["Battle%20for%20Zendikar"]
