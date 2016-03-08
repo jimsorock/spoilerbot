@@ -209,7 +209,7 @@ module SpoilerBot
       end
 
       status 200
-      reply = { text: @card_url }
+      reply = { attachments: @card_url }
       return reply.to_json
     end
   end
